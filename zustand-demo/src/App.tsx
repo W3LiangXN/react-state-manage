@@ -1,4 +1,5 @@
-import { create } from 'zustand';
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 
 interface ICountState {
   count: number;
@@ -8,13 +9,21 @@ interface ICountState {
   incrementByAmount: () => void;
 }
 
-const useCountStore = create<ICountState>((set) => ({
-  count: 0,
-  value: 100,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-  decrement: () => set((state) => ({ count: state.count - 1 })),
-  incrementByAmount: () => set((state) => ({ count: state.count + 10 })),
-}));
+const useCountStore = create<ICountState>()(
+  devtools(
+    (set) => ({
+      count: 0,
+      value: 100,
+      increment: () => set((state) => ({ count: state.count + 1 })),
+      decrement: () => set((state) => ({ count: state.count - 1 })),
+      incrementByAmount: () => set((state) => ({ count: state.count + 10 })),
+    }),
+    {
+      name: "user_store", // 浏览器调试时显示的 store 名称
+      enabled: true, // 是否开启调试工具(通常根据当前环境开启/关闭)
+    }
+  )
+);
 
 // 辅助器
 const Helper = () => {
