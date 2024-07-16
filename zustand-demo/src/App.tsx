@@ -30,9 +30,7 @@ const Listener = () => {
 
 // 控制器
 const Controller = () => {
-  const increment = useCountStore((state) => state.increment)
-  const decrement = useCountStore((state) => state.decrement)
-  const incrementByAmount = useCountStore((state) => state.increment)
+  const { increment, decrement, incrementByAmount } = useCountStore()
 
   return <div className="controller">
   <button
