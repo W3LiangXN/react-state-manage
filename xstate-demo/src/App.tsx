@@ -27,13 +27,13 @@ const counterMachine = createMachine({
     inactive: {
       on: {
         INCREMENT: {
-          actions: assign({ count: ({ context }) => context.count - 100 })
+          actions: assign({ count: ({ context }) => context.count + 100 })
         },
         DECREMENT: {
           actions: assign({ count: ({ context }) => context.count - 1000 })
         },
         INCREMENT_BY_AMOUNT: {
-          actions: assign({ count: ({ context }) => context.count - 10000 })
+          actions: assign({ count: ({ context }) => context.count + 10000 })
         },
         CHANGE: {
           target: 'active',
@@ -67,7 +67,7 @@ const CounterMachineContext = createActorContext(counterMachine)
 const Helper = () => {
   const value = CounterMachineContext.useSelector((state) => state.context.value);
 
-  return <h1>Helper { value } ---- {Date.now()}</h1>
+  return <h1>Helper { value } ---- { Date.now() }</h1>
 }
 
 // 监听器
@@ -79,7 +79,7 @@ const Listener = () => {
     }
   });
 
-  return <h1>{ state } count: {count}</h1>
+  return <h1>{ state } count: { count }</h1>
 }
 
 // 控制器

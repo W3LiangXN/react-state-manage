@@ -33,6 +33,7 @@ const PostTitle = () => {
 
 const Post = ({ initialPost }: { initialPost: any }) => {
 
+  // 主要是这个方法 处理水合的问题
   useHydrateAtoms([[postData, initialPost]]);
 
   return (
